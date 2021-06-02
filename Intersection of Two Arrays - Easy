@@ -1,0 +1,16 @@
+class Solution {
+public:
+    vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
+        unordered_map<int, int> count;
+        for (auto n : nums1)
+            count.find(n) == count.end() && count[n]++;
+        for (auto n : nums2)
+            count.find(n) != count.end() && count[n] == 1 && count[n]--;
+        vector<int> result;
+        for (auto c : count)
+            if (c.second == 0)
+                result.push_back(c.first);
+        return result;
+        
+    }
+};
