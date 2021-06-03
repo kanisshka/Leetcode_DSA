@@ -1,0 +1,29 @@
+class Solution {
+public:
+ int sumofsqr(int n)
+    {
+        int ans=0;
+        
+        while(n)
+        {
+            ans=ans+(n%10)*(n%10);
+            n=n/10;
+        }
+        
+        return ans;
+            
+    }
+    bool isHappy(int n) {
+        vector<int> check;
+        
+        int temp=n;
+        while(1)
+        {
+            if(temp==89)
+                return false;
+            if(temp==1)
+                return true;
+            temp=sumofsqr(temp);
+        }
+    }
+};
