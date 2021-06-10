@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int ans = 0;
+        int pre_ans = 0;
+        int pre_min_buy_price = prices[0];
+
+        for (int i = 2; i <= prices.size(); i += 1) {
+            int price = prices[i - 1];
+            ans = max(pre_ans, price - pre_min_buy_price);
+            pre_ans = ans;
+            pre_min_buy_price = min(price, pre_min_buy_price);
+        }
+
+        return ans;
+    }
+};
