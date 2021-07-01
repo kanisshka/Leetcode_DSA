@@ -1,0 +1,48 @@
+class Solution {
+public:
+    vector < vector < string> > ans;
+    int n;
+    
+   bool isp(string str)
+    {
+        int j = str.length() - 1;
+
+        for (int i = 0; i < j; i++, j--)
+        {
+            if (str[i] != str[j])
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+    
+    void palindrome(int i, vector <string>& vec, string& s) {
+        // cout<<"i "<<i<<endl;
+        if (i == n) {
+            ans.push_back(vec);
+            return;
+        }
+        for (int k = i + 1; k <= n; k++) {
+            // cout<<k<<" ";
+            string temp = s.substr(i, k - i);
+            // cout<<temp<<endl;
+            if (isp(temp)) {
+                // cout<<"push "<<temp<<endl;
+                vec.push_back(temp);
+                palindrome(k, vec, s);
+                vec.pop_back();
+                // cout<<"pop "<<temp<<endl;
+                
+            }
+        }
+    }
+    
+    vector<vector<string > >partition(string s) {
+        n = s.length();
+        vector <string> v;
+        palindrome(0, v, s);
+        return ans;
+    }
+};
