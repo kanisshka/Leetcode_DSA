@@ -1,0 +1,46 @@
+class Solution {
+public:
+    int calculate(string s) {
+        queue<char> Q;
+        int l =s.length();
+        for(int i=0; i<l; i++)
+        {
+            if(isspace(s[i]))
+                continue;
+            Q.push(s[i]);
+        }
+        Q.push(' ');
+        long long int num=0,sum=0,prev=0;
+        char prevop = '+';
+        while(!Q.empty())
+        {
+            char c = Q.front();
+            Q.pop();
+            if(isdigit(c))
+                num = num*10 + c-'0';
+            else
+            {
+                switch(prevop)
+                {
+                    case '+':
+                        sum+=prev;
+                        prev = num;
+                        break;
+                    case '-':
+                        sum+=prev;
+                        prev = -num;
+                        break;
+                    case '*':
+                        prev*=num;
+                        break;
+                    case '/':
+                        prev/=num;
+                        break;
+                }
+                prevop = c;
+                num=0;
+            }
+        }
+        return prev + sum;
+    }
+};
