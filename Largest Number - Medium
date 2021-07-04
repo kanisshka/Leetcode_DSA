@@ -1,0 +1,16 @@
+class Solution {
+public:
+    static bool cmp(string a,string b){
+        return a+b > b+a; //checking which pair is lexicographically greater
+    }
+    string largestNumber(vector<int>& nums) {
+        vector<string> strcontain;
+        for(int i : nums)  strcontain.push_back(to_string(i)); //convert all nums to char/string
+        sort(strcontain.begin(),strcontain.end(),cmp);
+        string result;//appending the chars
+        for(int i=0;i<strcontain.size();i++)  result+=strcontain[i];
+        
+        return result[0]=='0'? "0" : result; //If you don't write this, you will get wrong ans 
+        //In the case when input=[0,0..] as the result would have multiple zeros and we know it is quivalent to single zero
+    }
+};
