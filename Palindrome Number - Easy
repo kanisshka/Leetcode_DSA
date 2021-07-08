@@ -1,0 +1,23 @@
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        
+        bool ans = false;
+
+        int initial = x;
+        int reversed = 0;
+            
+        while(x != 0 && abs(reversed) < INT_MAX / 10)
+        {
+            reversed = reversed * 10 + x % 10;
+            x = x / 10;
+        }
+
+        if(initial >= 0)
+        {
+            ans = initial == reversed;
+        }
+        
+        return ans;
+    }
+};
